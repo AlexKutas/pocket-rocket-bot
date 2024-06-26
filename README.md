@@ -11,7 +11,7 @@
 | **USE_PROXY_FROM_FILE** | Whether to use proxy from the `bot/config/proxies.txt` file (True / False) |
 
 ## Installation
-You can download [**Repository**](https://github.com/shamhi/TapSwapBot) by cloning it to your system and installing the necessary dependencies:
+You can download [**Repository**](https://github.com/AlexKutas/pocket-rocket-bot) by cloning it to your system and installing the necessary dependencies:
 ```shell
 #Linux
 ~/pocket-rocket-bot >>> python3 -m venv venv
