@@ -4,7 +4,7 @@
 | Multithreading                                                 |     ✅     |
 | Collect Boots                                                  |     ✅     |
 | Binding a proxy to a session                                   |     ✅     |
-## [Settings](https://github.com/shamhi/TapSwapBot/blob/main/.env-example)
+## [Settings](https://github.com/AlexKutas/pocket-rocket-bot/blob/main/.env.example)
 | Setup                   | Description                                                                |
 |-------------------------|----------------------------------------------------------------------------|
 | **API_ID / API_HASH**   | Platform data from which to launch a Telegram session (stock - Android)    | |
