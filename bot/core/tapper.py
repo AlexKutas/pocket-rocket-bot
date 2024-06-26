@@ -186,7 +186,7 @@ class Tapper:
             response.raise_for_status()
 
             response_json = await response.json()
-            turbo, _ = response_json['data']
+            turbo = response_json['data'][0]
             has_turbo_boost = turbo['charges_left'] > 0
             turbo_charges_left = turbo['charges_left']
             turbo_next_available_at = turbo['next_available_at'] if turbo['next_available_at'] is not None else time() + 7200
@@ -212,7 +212,7 @@ class Tapper:
             response.raise_for_status()
 
             response_json = await response.json()
-            _, energy = response_json['data']
+            energy = response_json['data'][1]
             has_energy_boost = energy['charges_left'] > 0
             energy_next_available_at = (
                 energy['next_available_at'] if energy['next_available_at'] is not None else time() + 7200)
@@ -247,7 +247,7 @@ class Tapper:
             response.raise_for_status()
             response_json = await response.json()
 
-            logger.error(f"{self.session_name} | get_ship_improvements {response_json}")
+            # logger.error(f"{self.session_name} | get_ship_improvements {response_json}")
 
         except Exception as error:
             logger.error(f"{self.session_name} | Unknown error while getting ship improvements: {error}")
@@ -315,18 +315,18 @@ class Tapper:
                         logger.error(f"{self.session_name} | Unknown error {error}")
                         continue
 
-                    # if time() > revalidate_ship_improvements_time:
-                    #     try:
-                    #         await self.get_ship_improvements(http_client=http_client)
-                    #
-                    #     except Exception as error:
-                    #         logger.error(f"{self.session_name} | Error while getting ship improvements: {error}")
-                    #
-                    #     finally:
-                    #         revalidate_ship_improvements_time = time() + 60
-                    #         logger.info(f"{self.session_name} "
-                    #                     f"| Set {yellow}revalidate ship improvements{reset} time to "
-                    #                     f"{yellow}{round((time() + 60) / 60)} min{yellow}.")
+                    if time() > revalidate_ship_improvements_time:
+                        try:
+                            await self.get_ship_improvements(http_client=http_client)
+
+                        except Exception as error:
+                            logger.error(f"{self.session_name} | Error while getting ship improvements: {error}")
+
+                        finally:
+                            revalidate_ship_improvements_time = time() + 60
+                            logger.info(f"{self.session_name} "
+                                        f"| Set {yellow}revalidate ship improvements{reset} time to "
+                                        f"{yellow}{round((time() + 60) / 60)} min{yellow}.")
 
                     if time() > revalidate_turbo_time:
                         try:
